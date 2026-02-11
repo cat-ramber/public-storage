@@ -1,0 +1,3 @@
+user = username password(använd BCyrpt) userid
+map = mapname userid mapid  parentMapId(try to make maps hold maps)
+file = filename mapid(optional value) fileid text()
