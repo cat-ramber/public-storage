@@ -1,0 +1,27 @@
+meta {
+  name: get folder with id
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8080/folder/viewId
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwdWJsaWNTdG9yYWdlIiwic3ViIjoiMmQ1MDA1MzAtNTU3ZC00NGI3LTkzM2YtZjg5NzRhMGNjNmM2IiwiaWF0IjoxNzcwNzM4NTQxLCJleHAiOjE3NzA4MjQ5NDF9.zVlH4UF0Ubon0du9j4ouhTcR_Z0fQVhQNwxuiebPadw
+}
+
+body:json {
+  {
+    "folderId":"023e62d0-6041-4dbc-b479-ac3932ba81c2"
+  
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

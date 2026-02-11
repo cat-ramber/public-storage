@@ -1,0 +1,28 @@
+meta {
+  name: create file
+  type: http
+  seq: 9
+}
+
+post {
+  url: http://localhost:8080/file/create
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwdWJsaWNTdG9yYWdlIiwic3ViIjoiMmQ1MDA1MzAtNTU3ZC00NGI3LTkzM2YtZjg5NzRhMGNjNmM2IiwiaWF0IjoxNzcwNzU2MTMzLCJleHAiOjE3NzA4NDI1MzN9.Jq1EAy32w6Yb85Di_0LbkHTEOZ4GgCIVEYHg9LxDoTU
+}
+
+body:json {
+  {
+    "name":"file14",
+    "fileParentId":"2cab85e9-154e-44a5-a3cf-2bd68636347b",
+    "text":"cats walked over the bridge"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

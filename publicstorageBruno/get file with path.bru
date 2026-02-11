@@ -1,0 +1,20 @@
+meta {
+  name: get file with path
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/file/get/cat:file14
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwdWJsaWNTdG9yYWdlIiwic3ViIjoiMmQ1MDA1MzAtNTU3ZC00NGI3LTkzM2YtZjg5NzRhMGNjNmM2IiwiaWF0IjoxNzcwNzI4NjgzLCJleHAiOjE3NzA4MTUwODN9._O71vNtWaZB2H9zKQWqPJNAE0bKxha6hYhBvZ2nc4UI
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

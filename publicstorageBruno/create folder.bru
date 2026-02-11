@@ -1,0 +1,27 @@
+meta {
+  name: create folder
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/folder/create
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwdWJsaWNTdG9yYWdlIiwic3ViIjoiMmQ1MDA1MzAtNTU3ZC00NGI3LTkzM2YtZjg5NzRhMGNjNmM2IiwiaWF0IjoxNzcwNzI4NjgzLCJleHAiOjE3NzA4MTUwODN9._O71vNtWaZB2H9zKQWqPJNAE0bKxha6hYhBvZ2nc4UI
+}
+
+body:json {
+  {
+    "name":"caty",
+    "folderParentId":""
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

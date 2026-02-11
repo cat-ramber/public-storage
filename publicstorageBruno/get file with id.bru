@@ -1,0 +1,26 @@
+meta {
+  name: get file with id
+  type: http
+  seq: 11
+}
+
+get {
+  url: http://localhost:8080/file/getId
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwdWJsaWNTdG9yYWdlIiwic3ViIjoiMmQ1MDA1MzAtNTU3ZC00NGI3LTkzM2YtZjg5NzRhMGNjNmM2IiwiaWF0IjoxNzcwNzU2MTMzLCJleHAiOjE3NzA4NDI1MzN9.Jq1EAy32w6Yb85Di_0LbkHTEOZ4GgCIVEYHg9LxDoTU
+}
+
+body:json {
+  {
+    "id":"04de641b-8d83-4e0f-9117-394cfea5540d"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
