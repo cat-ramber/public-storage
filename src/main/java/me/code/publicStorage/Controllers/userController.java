@@ -15,6 +15,8 @@ import me.code.publicStorage.Services.userService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 
 @RestController
 @AllArgsConstructor
@@ -26,6 +28,7 @@ public class userController {
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequest request){
         try{
           CreateUserResponds responds = userService.createUser(request);
+
            return ResponseEntity.ok().body(responds);
         }catch (CreateUserException e){
            return ResponseEntity.badRequest().body(new ErrorResponds(e.getMessage()));

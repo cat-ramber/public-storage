@@ -2,6 +2,7 @@ package me.code.publicStorage.Services;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import me.code.publicStorage.Dto.Folder.*;
 import me.code.publicStorage.Exceptions.Folder.create.PathAlreadyExistsException;
@@ -202,6 +203,24 @@ public class folderService {
         }catch (IllegalArgumentException ignored){
             throw new IdViewException("couldn't parse "+folderId+" into uuid");
         }
+    }
+
+
+    public Folder getFolder( String id)throws IdViewException{
+        UUID uuid;
+        try {
+            if(id==null){
+                throw new IdViewException("can't search for id null");
+            }
+            uuid=UUID.fromString(id);
+        }catch (IllegalArgumentException e){
+            throw new IdViewException("failed to convert the id to uuid");
+        }
+      Optional<Folder> folder=folderRepository.findById(uuid);
+      if(folder.isEmpty()){
+          throw new IdViewException("failed to get folder using id");
+      }
+      return folder.get();
     }
 
 }

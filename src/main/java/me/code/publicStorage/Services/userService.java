@@ -3,6 +3,7 @@ package me.code.publicStorage.Services;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import me.code.publicStorage.Dto.User.ViewAllResponds;
 import me.code.publicStorage.Dto.User.CreateUserRequest;
@@ -24,6 +25,9 @@ import me.code.publicStorage.Repositories.IUserRepository;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +39,28 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 @Slf4j
-public class userService{
+public class userService {
     private final IUserRepository IUserRepository;
     private final IFolderRepository folderRepository;
     private final IFileRepository fileRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
+
+    public User getAuthedUser()throws AuthedUserException{//to get the logged-in user if there is one
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication==null){
+            throw new AuthedUserException("couldn't get user from token");
+        }
+        if(authentication.getPrincipal() instanceof User user){
+            Optional<User> optionalUser = IUserRepository.findById(user.getUserId());//apparently needed this since repository is evil
+            if(optionalUser.isPresent()){
+                return optionalUser.get();
+            }
+        }
+
+        throw new AuthedUserException("couldn't get user from token");
+    }
 
     public CreateUserResponds createUser(CreateUserRequest request)throws CreateUserException {
         if(request.getUsername()==null||request.getUsername().isBlank()){
@@ -94,22 +114,6 @@ public class userService{
         }
        return new LoginResponds("Bearer "+jwtService.createToken(user.getUserId()));
     }
-
-    public User getAuthedUser()throws AuthedUserException{//to get the logged-in user if there is one
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication==null){
-            throw new AuthedUserException("couldn't get user from token");
-        }
-        if(authentication.getPrincipal() instanceof User user){
-          Optional<User> optionalUser = IUserRepository.findById(user.getUserId());//apparently needed this since repository is evil
-          if(optionalUser.isPresent()){
-              return optionalUser.get();
-            }
-        }
-
-        throw new AuthedUserException("couldn't get user from token");
-    }
     @Transactional
     public ViewAllResponds viewAll()throws AuthedUserException {
         User user=getAuthedUser();
@@ -135,5 +139,18 @@ public class userService{
         return new ViewAllResponds(allFolders,allFiles,user.getUserName());
 
     }
+    public boolean userNameExist(String username){
+       Optional<User> user = IUserRepository.findByUserName(username);
+        return user.isPresent();
+    }
 
+
+    //oAuth2 section
+    public Optional<User> getOidcUser(String oidcId,String oidcProvider){
+       return IUserRepository.findByOidcIdAndOidcProvider(oidcId,oidcProvider);
+    }
+    public void createOidcUser(String username,String oidcId,String oidcProvider,Date createdAt){
+        User user=new User(username,oidcId,oidcProvider,createdAt);
+        IUserRepository.save(user);
+    }
 }

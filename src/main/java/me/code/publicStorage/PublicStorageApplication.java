@@ -9,11 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 public class PublicStorageApplication {
 	public static void main(String[] args) {
-		if(System.getenv("SALT")==null||System.getenv("SALT").isBlank()){
-            log.error("ERROR you need to declare the variable SALT for System.getenv()");
-            return;
+        try{
+            if(System.getenv("SALT")==null||System.getenv("SALT").isBlank()){
+                log.error("ERROR you need to declare the variable SALT for System.getenv()");
+                return;
+            }
+            SpringApplication.run(PublicStorageApplication.class, args);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
-        SpringApplication.run(PublicStorageApplication.class, args);
 	}
 
 }

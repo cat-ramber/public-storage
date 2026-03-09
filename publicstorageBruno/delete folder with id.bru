@@ -5,19 +5,14 @@ meta {
 }
 
 delete {
-  url: http://localhost:8080/folder/delete
+  url: http://localhost:8080/folder/delete/b28aec01-f904-40cb-91a3-5ddff967359d
   body: json
   auth: inherit
 }
 
 headers {
-  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwdWJsaWNTdG9yYWdlIiwic3ViIjoiMmQ1MDA1MzAtNTU3ZC00NGI3LTkzM2YtZjg5NzRhMGNjNmM2IiwiaWF0IjoxNzcwODQ0MzM4LCJleHAiOjE3NzA5MzA3Mzh9.gn-4zaZEsf8e_LLnUwCpAOecw3ztR7t0v1GZvpYLflg
-}
-
-body:json {
-  {
-    "folderId":"a80ca0e9-95b3-4417-b0e7-b03c25ca532f"
-  }
+  Cookie: JSESSIONID=3D8BAC324EFCD7307AAF88561CB5A139;
+  ~Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwdWJsaWNTdG9yYWdlIiwic3ViIjoiMmQ1MDA1MzAtNTU3ZC00NGI3LTkzM2YtZjg5NzRhMGNjNmM2IiwiaWF0IjoxNzcyOTgzNTE0LCJleHAiOjE3NzMwNjk5MTR9.Knx_Jn_Vj0PUcprs5XXQZgJoLR9h-Wt6CuoBH9bF12s
 }
 
 settings {

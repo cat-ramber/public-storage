@@ -12,8 +12,8 @@ import java.util.UUID;
 
 @Service
 public class JWTService {
-    private static final Algorithm algorithm=Algorithm.HMAC256(System.getenv("SALT"));
-    private static final JWTVerifier jwtVerifier= JWT.require(algorithm).withIssuer("publicStorage").build();
+    private  final Algorithm algorithm=Algorithm.HMAC256(System.getenv("SALT"));
+    private final JWTVerifier jwtVerifier= JWT.require(algorithm).withIssuer("publicStorage").build();
 
     public String createToken(UUID userId){
      return  JWT.create().withIssuer("publicStorage")
